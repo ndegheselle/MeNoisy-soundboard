@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MeNoisy_soundboard.App.Pages._Base
+namespace MeNoisy_soundboard.App.Base
 {
     public class BasePage<TContext> : UserControl where TContext : new()
     {
