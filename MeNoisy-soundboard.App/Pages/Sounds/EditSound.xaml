@@ -8,10 +8,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MeNoisy_soundboard.App.Pages.Sounds"
+    xmlns:components="clr-namespace:MeNoisy_soundboard.App.Base.Components"
     mc:Ignorable="d"
     d:DesignHeight="450"
-    d:DesignWidth="800">
-    <TextBlock>
-        Editing
-    </TextBlock>
+    d:DesignWidth="800"
+    Margin="2">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="From a file" />
+            <components:FilePicker />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"></Button>
+        </StackPanel>
+    </Grid>
 </base:BasePage>

@@ -32,7 +32,6 @@
                 <TextBlock
                     Text="&#x2b;"
                     FontFamily="{StaticResource FontAwesomeSolid}"
-                    FontSize="12"
                     Margin="2"
                     VerticalAlignment="Center" />
             </Button>
