@@ -2,18 +2,25 @@
 
 namespace MeNoisy_soundboard.App.Base
 {
-    public class BasePage<TContext> : UserControl where TContext : new()
+    public class BasePage<TContext> : BasePage where TContext : class, new()
     {
-        protected IWindow Window { get; set; }
-        protected TContext Context { get; set; }
+        public TContext Context { get; set; }
 
-        public BasePage(IWindow window, TContext contexte)
+        public override void Show(IWindow window, object? contexte = null)
         {
-            Window = window;
-            Context = contexte;
+            base.Show(window, contexte);
+            Context = contexte as TContext ?? new TContext();
             this.DataContext = Context;
         }
-        public BasePage(IWindow window) : this(window, new TContext())
-        {}
+    }
+
+    public abstract class BasePage : UserControl
+    {
+        protected IWindow Window { get; set; }
+
+        public virtual void Show(IWindow window, object? contexte = null)
+        {
+            Window = window;
+        }
     }
 }

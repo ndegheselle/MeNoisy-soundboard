@@ -8,7 +8,7 @@ namespace MeNoisy_soundboard.App.Pages.Sounds
     /// </summary>
     public partial class EditSound : BasePage<Sound>
     {
-        public EditSound(IWindow window) : base(window)
+        public EditSound()
         {
             InitializeComponent();
         }

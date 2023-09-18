@@ -11,10 +11,8 @@ namespace MeNoisy_soundboard.App.Base
     public interface IWindow
     {
         #region Navigation
-
-        // XXX : Maybe pass the window there ?
-        void Navigate(FrameworkElement page);
-        void Push(FrameworkElement page);
+        void Navigate<TPage>(object? context = null, TPage? page = null) where TPage : BasePage, new();
+        void Push<TPage>(object? context = null, TPage? page = null) where TPage : BasePage, new();
         void Pop();
         #endregion
     }

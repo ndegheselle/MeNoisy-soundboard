@@ -13,7 +13,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StatusBar Visibility="{Binding Stack.Count, RelativeSource={RelativeSource AncestorType=local:MainWindow}, Converter={StaticResource UniversalVisibilityConverter}}">
+        <StatusBar Visibility="{Binding CanGoBack, RelativeSource={RelativeSource AncestorType=local:MainWindow}, Converter={StaticResource UniversalVisibilityConverter}}">
             <StatusBarItem>
                 <Button
                     Grid.Column="1"

@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MeNoisy_soundboard.App.Pages.Sounds"
     xmlns:components="clr-namespace:MeNoisy_soundboard.App.Base.Components"
+    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -16,9 +17,9 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <StackPanel>
@@ -26,8 +27,37 @@
             <components:FilePicker />
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"></Button>
-        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Text="&#xf1f8;"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        Margin="0,0,8,0" />
+                    <TextBlock Text="Delete" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Text="&#xf0c7;"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        Margin="0,0,8,0" />
+                    <TextBlock Text="Save" />
+                </StackPanel>
+            </Button>
+        </Grid>
     </Grid>
 </base:BasePage>

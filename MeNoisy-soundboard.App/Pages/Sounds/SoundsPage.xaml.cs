@@ -9,19 +9,15 @@ namespace MeNoisy_soundboard.App.Pages.Sounds
     /// </summary>
     public partial class SoundsPage : BasePage<SoundsContext>
     {
-        private IWindow _Window;
-
-        public SoundsPage(IWindow window) : base(window)
+        public SoundsPage() 
         {
             InitializeComponent();
-            _Window = window;
         }
-
 
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            _Window.Push(new EditSound(_Window));
+            Window.Push<EditSound>(new Sound());
         }
         #endregion
     }
