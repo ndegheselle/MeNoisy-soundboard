@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeNoisy_soundboard.App.Pages.Sounds.Context
+namespace MeNoisy_soundboard.App.Logic.Sounds.Context
 {
     public class SoundsContext
     {

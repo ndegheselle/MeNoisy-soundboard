@@ -1,6 +1,6 @@
 ﻿<base:BasePage
     x:TypeArguments="context:Sound"
-    xmlns:context="clr-namespace:MeNoisy_soundboard.App.Pages.Sounds.Context"
+    xmlns:context="clr-namespace:MeNoisy_soundboard.App.Logic.Sounds.Context"
     xmlns:base="clr-namespace:MeNoisy_soundboard.App.Base"
     x:Class="MeNoisy_soundboard.App.Pages.Sounds.EditSound"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
