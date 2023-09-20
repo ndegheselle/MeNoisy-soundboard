@@ -1,10 +1,13 @@
 ﻿using AdonisUI.Controls;
 using MeNoisy_soundboard.App.Base;
+using MeNoisy_soundboard.App.Logic;
 using MeNoisy_soundboard.App.Pages.Sounds;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -17,26 +20,27 @@ namespace MeNoisy_soundboard.App
     public partial class MainWindow : AdonisWindow, IWindow, INotifyPropertyChanged
     {
         public ObservableCollection<BasePage> Stack { get; set; } = new ObservableCollection<BasePage>();
+        public GlobalContext GlobalContext { get; set; } = new GlobalContext();
         public bool CanGoBack { get; set; } = false;
 
         public MainWindow()
         {
             InitializeComponent();
-            Navigate<SoundsPage>();
+            Navigate<SoundsPage>(GlobalContext.Sounds);
         }
 
         #region Navigation
 
-        public void Navigate<TPage>(object? context = null, TPage ? page = null) where TPage : BasePage, new()
+        public void Navigate<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
         {
             Stack.Clear();
-            Push(context, page);
+            Push(context, parameters, page);
         }
 
-        public void Push<TPage>(object? context = null, TPage? page = null) where TPage : BasePage, new()
+        public void Push<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
         {
-            page = page ?? new TPage();
-            page.Show(this, context);
+            page ??= new TPage();
+            page.Show(this, context, parameters);
             Stack.Add(page);
             MainContainer.Content = page;
 
@@ -57,7 +61,7 @@ namespace MeNoisy_soundboard.App
         {
             Pop();
         }
-        #endregion
 
+        #endregion
     }
 }

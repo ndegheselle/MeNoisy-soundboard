@@ -11,8 +11,8 @@ namespace MeNoisy_soundboard.App.Base
     public interface IWindow
     {
         #region Navigation
-        void Navigate<TPage>(object? context = null, TPage? page = null) where TPage : BasePage, new();
-        void Push<TPage>(object? context = null, TPage? page = null) where TPage : BasePage, new();
+        void Navigate<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new();
+        void Push<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new();
         void Pop();
         #endregion
     }
