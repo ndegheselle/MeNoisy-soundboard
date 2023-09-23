@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MeNoisy_soundboard.App
+namespace MeNoisySoundboard.App
 {
     /// <summary>
     /// Interaction logic for App.xaml

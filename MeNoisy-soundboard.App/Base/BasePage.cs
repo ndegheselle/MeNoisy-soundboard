@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MeNoisy_soundboard.App.Base
+namespace MeNoisySoundboard.App.Base
 {
     public class BasePage<TContext> : BasePage where TContext : class, new()
     {

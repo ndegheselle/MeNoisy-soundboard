@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Controls;
 
-namespace MeNoisy_soundboard.App.Base
+namespace MeNoisySoundboard.App.Base
 {
     public interface IWork
     {
@@ -30,6 +30,8 @@ namespace MeNoisy_soundboard.App.Base
         }
     }
 
+    // Pass parameters to work
+    // Pass context to work (global, or local to the workflow -> same pb than with parameters (how to specified what you want))
     public class Workflow : IWork
     {
         protected List<IWork> Works { get; set; }

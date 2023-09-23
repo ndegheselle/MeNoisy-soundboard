@@ -1,8 +1,8 @@
-﻿using MeNoisy_soundboard.App.Base;
-using MeNoisy_soundboard.App.Logic.Sounds.Context;
+﻿using MeNoisySoundboard.App.Base;
+using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System.Windows;
 
-namespace MeNoisy_soundboard.App.Pages.Sounds
+namespace MeNoisySoundboard.App.Pages.Sounds
 {
     /// <summary>
     /// Logique d'interaction pour SoundsPage.xaml

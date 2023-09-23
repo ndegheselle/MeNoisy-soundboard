@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MeNoisy_soundboard.App.Base.Components
+namespace MeNoisySoundboard.App.Base.Components
 {
     /// <summary>
     /// Logique d'interaction pour FilePicker.xaml

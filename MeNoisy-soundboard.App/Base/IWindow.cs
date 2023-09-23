@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MeNoisy_soundboard.App.Base
+namespace MeNoisySoundboard.App.Base
 {
     public interface IWindow
     {

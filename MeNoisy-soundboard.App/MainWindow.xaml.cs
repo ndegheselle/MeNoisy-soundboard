@@ -1,7 +1,7 @@
 ﻿using AdonisUI.Controls;
-using MeNoisy_soundboard.App.Base;
-using MeNoisy_soundboard.App.Logic;
-using MeNoisy_soundboard.App.Pages.Sounds;
+using MeNoisySoundboard.App.Base;
+using MeNoisySoundboard.App.Logic;
+using MeNoisySoundboard.App.Pages.Sounds;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace MeNoisy_soundboard.App
+namespace MeNoisySoundboard.App
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,7 +26,7 @@ namespace MeNoisy_soundboard.App
         public MainWindow()
         {
             InitializeComponent();
-            Navigate<SoundsPage>(GlobalContext.Sounds);
+            Navigate<SoundsPage>(GlobalContext.SoundsContext);
         }
 
         #region Navigation

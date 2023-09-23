@@ -1,10 +1,10 @@
 ﻿<Application
-    x:Class="MeNoisy_soundboard.App.App"
+    x:Class="MeNoisySoundboard.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-    xmlns:local="clr-namespace:MeNoisy_soundboard.App"
-    xmlns:converters="clr-namespace:MeNoisy_soundboard.App.Base.Converters"
+    xmlns:local="clr-namespace:MeNoisySoundboard.App"
+    xmlns:converters="clr-namespace:MeNoisySoundboard.App.Base.Converters"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

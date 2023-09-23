@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeNoisy_soundboard.App.Logic.Sounds.Context
+namespace MeNoisySoundboard.App.Logic.Sounds.Context
 {
     public class Sound
     {
@@ -16,8 +16,22 @@ namespace MeNoisy_soundboard.App.Logic.Sounds.Context
         public string Shortcut { get; set; }
     }
 
-    public interface ISoundsContext
+    public class SoundsContext
     {
-        ObservableCollection<Sound> Sounds { get; set; }
+        public ObservableCollection<Sound> Sounds { get; set; } = new ObservableCollection<Sound>()
+        {
+            new Sound()
+            {
+                Name = "Testing",
+                Duration = TimeSpan.FromSeconds(3),
+                Shortcut = "CTRL + 8"
+            },
+            new Sound()
+            {
+                Name = "Testing",
+                Duration = TimeSpan.FromSeconds(3),
+                Shortcut = "CTRL + 8"
+            }
+        };
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 
-namespace MeNoisy_soundboard.App.Base.Converters
+namespace MeNoisySoundboard.App.Base.Converters
 {
     public class UniversalVisibilityConverter : IValueConverter
     {
