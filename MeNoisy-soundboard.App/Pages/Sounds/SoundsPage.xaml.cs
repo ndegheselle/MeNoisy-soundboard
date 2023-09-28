@@ -17,8 +17,20 @@ namespace MeNoisySoundboard.App.Pages.Sounds
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            Window.Push<EditSound>(new Sound());
+            App.Push<EditSound>(Context, new Sound());
         }
+
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            Sound sound = element.DataContext as Sound;
+
+            if (sound == null) return;
+
+            App.Push<EditSound>(Context, sound);
+        }
+
         #endregion
     }
 }

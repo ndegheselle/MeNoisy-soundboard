@@ -6,21 +6,21 @@ namespace MeNoisySoundboard.App.Base
     {
         public TContext Context { get; set; }
 
-        public override void Show(IWindow window, object contexte, object? parameters = null)
+        public override void Show(IApp app, object contexte, object? parameters = null)
         {
-            base.Show(window, contexte, parameters);
-            Context = contexte as TContext ?? new TContext();
+            base.Show(app, contexte, parameters);
+            Context = contexte as TContext;
             this.DataContext = Context;
         }
     }
 
     public abstract class BasePage : UserControl
     {
-        protected IWindow Window { get; set; }
+        protected IApp App { get; set; }
 
-        public virtual void Show(IWindow window, object contexte, object? parameters = null)
+        public virtual void Show(IApp app, object contexte, object? parameters = null)
         {
-            Window = window;
+            App = app;
         }
     }
 }

@@ -17,14 +17,15 @@ namespace MeNoisySoundboard.App
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : AdonisWindow, IWindow, INotifyPropertyChanged
+    public partial class MainWindow : AdonisWindow, IApp, INotifyPropertyChanged
     {
         public ObservableCollection<BasePage> Stack { get; set; } = new ObservableCollection<BasePage>();
-        public GlobalContext GlobalContext { get; set; } = new GlobalContext();
+        public GlobalContext GlobalContext { get; set; }
         public bool CanGoBack { get; set; } = false;
 
         public MainWindow()
         {
+            GlobalContext = GlobalContext.Load();
             InitializeComponent();
             Navigate<SoundsPage>(GlobalContext.SoundsContext);
         }
@@ -56,12 +57,20 @@ namespace MeNoisySoundboard.App
 
         #endregion
 
+        #region Save context
+
+        public void SaveContext()
+        {
+            GlobalContext.Save();
+        }
+
+        #endregion
+
         #region UI Events
         private void NavigationBack_Click(object sender, RoutedEventArgs e)
         {
             Pop();
         }
-
         #endregion
     }
 }

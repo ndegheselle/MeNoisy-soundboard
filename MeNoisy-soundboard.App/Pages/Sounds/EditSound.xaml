@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MeNoisySoundboard.App.Pages.Sounds"
     xmlns:components="clr-namespace:MeNoisySoundboard.App.Base.Components"
+    xmlns:converters="clr-namespace:MeNoisySoundboard.App.Base.Converters"
     xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
     mc:Ignorable="d"
     d:DesignHeight="450"
@@ -23,7 +24,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="From a file" />
+            <TextBlock Text="Name" />
+            <TextBox Text="{Binding Name}" Margin="0,0,0,6" />
+            <TextBlock Text="Sound file" />
             <components:FilePicker />
         </StackPanel>
 
@@ -33,7 +36,10 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button>
+            <Button
+                x:Name="DeleteButton"
+                Visibility="{Binding Id, Converter={StaticResource UniversalVisibilityConverter}}"
+                Click="DeleteButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
                         Text="&#xf1f8;"
@@ -45,9 +51,11 @@
                 </StackPanel>
             </Button>
             <Button
+                x:Name="SaveButton"
                 Grid.Column="2"
                 HorizontalAlignment="Right"
-                Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}">
+                Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}"
+                Click="SaveButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
                         Text="&#xf0c7;"

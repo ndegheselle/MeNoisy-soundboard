@@ -10,18 +10,21 @@ namespace MeNoisySoundboard.App.Base
 {
     public interface IWork
     {
-        public Task Do();
+        public Task<object> Do(object? parameters = default);
     }
 
-    public class Work : IWork
+    public class WorkUi<TContext, TParams, TResult> : UserControl, IWork
     {
-        public TaskCompletionSource TaskCompletion { get; set; } = new TaskCompletionSource();
+        public TaskCompletionSource<TResult> TaskCompletion { get; set; } = new TaskCompletionSource<TResult>();
 
-        public object? Context { get; set; } = null;
+        public TContext? Context { get; set; } = default;
+        public TParams? Parameters{ get; set; } = default;
 
-        public async Task Do()
+        // May be good to add a OnStart event (for exempel to refresh the UI)
+        public virtual async Task<object> Do(object? parameters = default)
         {
-            await TaskCompletion.Task;
+            Parameters = (TParams)parameters;
+            return await TaskCompletion.Task;
         }
 
         public void Cancel()
@@ -30,21 +33,25 @@ namespace MeNoisySoundboard.App.Base
         }
     }
 
-    // Pass parameters to work
-    // Pass context to work (global, or local to the workflow -> same pb than with parameters (how to specified what you want))
-    public class Workflow : IWork
+    public class Workflow<TContext, TParams, TResult> : IWork
     {
-        protected List<IWork> Works { get; set; }
+        // May not need to pass context there since the delegate will have access to the workflow data anyway
+        public delegate IWork CreateWork(TContext workflowContext);
+        public TContext? Context { get; set; } = default;
 
-        public async Task Do()
+        protected Dictionary<Type, CreateWork> SubWorks { get; set; } = new Dictionary<Type, CreateWork>();
+
+        public virtual async Task<object> Do(object? workflowParameters = default)
         {
-
             int currentIndex = 0;
-            while(currentIndex >= 0 && currentIndex < Works.Count)
+            object? chainParameters = null;
+            while(currentIndex >= 0 && currentIndex < SubWorks.Count)
             {
                 try
                 {
-                    await Works[currentIndex].Do();
+                    var work = SubWorks.ElementAt(currentIndex).Value(Context);
+                    // In a workflow we chain the parameters of each work
+                    chainParameters = await work.Do(chainParameters);
                 }
                 catch (TaskCanceledException)
                 {
@@ -55,6 +62,8 @@ namespace MeNoisySoundboard.App.Base
             }
 
             if (currentIndex < 0) throw new TaskCanceledException();
+
+            return default(TResult);
         }
     }
 }
