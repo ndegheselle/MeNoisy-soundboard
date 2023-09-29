@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MeNoisySoundboard.App.Logic.Sounds.Context
 {
@@ -12,8 +13,8 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public Guid? Id { get; set; } = null;
 
         public string Name { get; set; }
-        public string Shortcut { get; set; }
         public string FilePath { get; set; }
+        public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
 
         public TimeSpan Duration { get; set; }
     }

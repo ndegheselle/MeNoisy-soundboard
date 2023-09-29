@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:base="clr-namespace:MeNoisySoundboard.App.Base"
+    xmlns:components="clr-namespace:MeNoisySoundboard.App.Base.Components"
     xmlns:local="clr-namespace:MeNoisySoundboard.App.Pages.Sounds"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
@@ -64,7 +65,7 @@
                             Orientation="Vertical"
                             VerticalAlignment="Center">
                             <TextBlock Text="{Binding Duration}" TextAlignment="Right" />
-                            <TextBlock Text="{Binding Shortcut}" TextAlignment="Right" />
+                            <components:ShortcutDisplay Shortcut="{Binding Shortcut}" />
                         </StackPanel>
                         <StackPanel
                             Grid.Column="2"

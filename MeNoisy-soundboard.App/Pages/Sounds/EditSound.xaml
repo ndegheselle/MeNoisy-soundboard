@@ -25,11 +25,11 @@
 
         <StackPanel>
             <TextBlock Text="Name" />
-            <TextBox Text="{Binding Name}" Margin="0,0,0,6" />
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="0,0,0,6" />
             <TextBlock Text="Sound file" />
             <components:FilePicker SelectedFilePath="{Binding FilePath, Mode=TwoWay}" Margin="0,0,0,6" />
             <TextBlock Text="Shortcut" />
-            <TextBox Text="{Binding Shortcut}" Margin="0,0,0,6" />
+            <components:ShortcutSelector Shortcut="{Binding Shortcut, Mode=TwoWay}" Margin="0,0,0,6" />
         </StackPanel>
 
         <Grid Grid.Row="2">
@@ -60,7 +60,7 @@
                 Click="SaveButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
-                        Text="&#xf0c7;"
+                        Text="&#xf304;"
                         FontFamily="{StaticResource FontAwesomeSolid}"
                         FontSize="12"
                         VerticalAlignment="Center"
