@@ -27,7 +27,9 @@
             <TextBlock Text="Name" />
             <TextBox Text="{Binding Name}" Margin="0,0,0,6" />
             <TextBlock Text="Sound file" />
-            <components:FilePicker />
+            <components:FilePicker SelectedFilePath="{Binding FilePath, Mode=TwoWay}" Margin="0,0,0,6" />
+            <TextBlock Text="Shortcut" />
+            <TextBox Text="{Binding Shortcut}" Margin="0,0,0,6" />
         </StackPanel>
 
         <Grid Grid.Row="2">

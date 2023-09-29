@@ -12,8 +12,10 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public Guid? Id { get; set; } = null;
 
         public string Name { get; set; }
-        public TimeSpan Duration { get; set; }
         public string Shortcut { get; set; }
+        public string FilePath { get; set; }
+
+        public TimeSpan Duration { get; set; }
     }
 
     public class SoundsContext

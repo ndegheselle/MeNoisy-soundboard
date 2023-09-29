@@ -42,14 +42,14 @@ namespace MeNoisySoundboard.App.Base.Components
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            InputFilePath.Text = "";
+            SelectedFilePath = "";
         }
 
         private void OpenPicker_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
-                InputFilePath.Text = openFileDialog.FileName;
+                SelectedFilePath = openFileDialog.FileName;
         }
     }
 }

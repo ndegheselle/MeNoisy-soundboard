@@ -14,12 +14,11 @@
         </Grid.ColumnDefinitions>
 
         <TextBox
-            x:Name="InputFilePath"
             IsReadOnly="True"
             Text="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}}"
             BorderThickness="1,1,0,1" />
         <Button
-            Visibility="{Binding Text, ElementName=InputFilePath, Converter={StaticResource UniversalVisibilityConverter}}"
+            Visibility="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}, Converter={StaticResource UniversalVisibilityConverter}}"
             Grid.Column="1"
             BorderThickness="0,1,1,1"
             Click="Clear_Click">
