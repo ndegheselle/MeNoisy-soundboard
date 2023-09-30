@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace MeNoisySoundboard.App.Logic.Sounds.Context
 {
-    public class Sound
+    public class Sound : ICloneable
     {
         public Guid? Id { get; set; } = null;
 
@@ -17,6 +17,11 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
 
         public TimeSpan Duration { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 
     public class SoundsContext

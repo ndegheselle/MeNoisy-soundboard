@@ -19,43 +19,17 @@ namespace MeNoisySoundboard.App
     /// </summary>
     public partial class MainWindow : AdonisWindow, IApp, INotifyPropertyChanged
     {
-        public ObservableCollection<BasePage> Stack { get; set; } = new ObservableCollection<BasePage>();
         public GlobalContext GlobalContext { get; set; }
-        public bool CanGoBack { get; set; } = false;
+        public NavigationHandler Navigation { get; set; }
 
         public MainWindow()
         {
             GlobalContext = GlobalContext.Load();
             InitializeComponent();
-            Navigate<SoundsPage>(GlobalContext.SoundsContext);
+            Navigation = new NavigationHandler(this, MainContainer);
+
+            Navigation.Navigate<SoundsPage>(GlobalContext.SoundsContext);
         }
-
-        #region Navigation
-
-        public void Navigate<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
-        {
-            Stack.Clear();
-            Push(context, parameters, page);
-        }
-
-        public void Push<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
-        {
-            page ??= new TPage();
-            page.Show(this, context, parameters);
-            Stack.Add(page);
-            MainContainer.Content = page;
-
-            CanGoBack = Stack.Count > 1;
-        }
-
-        public void Pop()
-        {
-            Stack.RemoveAt(Stack.Count - 1);
-            MainContainer.Content = Stack[Stack.Count - 1];
-            CanGoBack = Stack.Count > 1;
-        }
-
-        #endregion
 
         #region Save context
 
@@ -69,7 +43,7 @@ namespace MeNoisySoundboard.App
         #region UI Events
         private void NavigationBack_Click(object sender, RoutedEventArgs e)
         {
-            Pop();
+            Navigation.Pop();
         }
         #endregion
     }

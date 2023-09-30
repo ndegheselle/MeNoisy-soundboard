@@ -1,6 +1,7 @@
 ﻿using MeNoisySoundboard.App.Base;
 using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System;
+using System.Linq;
 
 namespace MeNoisySoundboard.App.Pages.Sounds
 {
@@ -9,6 +10,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
     /// </summary>
     public partial class EditSound : BasePage<SoundsContext>
     {
+        private Sound OrginalSound;
         public Sound ActualSound { get; set; }
 
         public EditSound()
@@ -21,7 +23,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             base.Show(app, contexte, parameters);
             ActualSound = parameters as Sound;
 
-            // TODO : take a clone of the object since otherwise he will be modified even if you abort edit
+            if (ActualSound?.Id != null) OrginalSound = ActualSound;
             this.DataContext = ActualSound;
         }
 
@@ -31,7 +33,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
         {
             Context.Sounds.Remove(ActualSound);
             App.SaveContext();
-            App.Pop();
+            App.Navigation.Pop();
         }
 
         private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -43,7 +45,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             }
 
             App.SaveContext();
-            App.Pop();
+            App.Navigation.Pop();
         }
 
         #endregion

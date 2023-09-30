@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MeNoisySoundboard.App.Base
 {
@@ -22,5 +23,9 @@ namespace MeNoisySoundboard.App.Base
         {
             App = app;
         }
+
+        // Async to handle pages change animation for example
+        public virtual async Task Hide()
+        { }
     }
 }
