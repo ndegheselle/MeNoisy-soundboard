@@ -5,33 +5,68 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MeNoisySoundboard.App.Base.Components"
-    mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+    xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+    xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+    xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
+    mc:Ignorable="d"
+    Validation.ErrorTemplate="{x:Null}">
+    <UserControl.Resources>
+        <Style TargetType="local:FilePicker">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:FilePicker">
+                        <Border x:Name="ErrorBorder">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
 
-        <TextBox
-            IsReadOnly="True"
-            Text="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}}"
-            BorderThickness="1,1,0,1" />
-        <Button
-            Visibility="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}, Converter={StaticResource UniversalVisibilityConverter}}"
-            Grid.Column="1"
-            BorderThickness="0,1,1,1"
-            Click="Clear_Click">
-            <TextBlock
-                Text="&#xf00d;"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                VerticalAlignment="Center" />
-        </Button>
-        <Button Grid.Column="2" Click="OpenPicker_Click">
-            <TextBlock
-                Text="&#xf07b;"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                VerticalAlignment="Center" />
-        </Button>
-    </Grid>
+                                <adonisControls:ValidationErrorIndicator
+                                    x:Name="ErrorAlertHost"
+                                    ValidatedElement="{Binding ., RelativeSource={RelativeSource AncestorType=local:FilePicker}}"
+                                    IsValidatedElementFocused="{Binding IsFocused, RelativeSource={RelativeSource AncestorType=local:FilePicker}}"
+                                    IsErrorMessageDisplayOnFocusEnabled="True"
+                                    IsErrorMessageDisplayOnMouseOverEnabled="True"
+                                    ErrorMessagePlacement="Top"
+                                    Visibility="Collapsed"
+                                    Margin="8,0,4,0" />
+
+                                <TextBox
+                                    IsReadOnly="True"
+                                    Text="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}}"
+                                    BorderThickness="1,1,0,1"
+                                    Grid.Column="1" />
+                                <Button
+                                    Visibility="{Binding SelectedFilePath, RelativeSource={RelativeSource AncestorType=local:FilePicker}, Converter={StaticResource UniversalVisibilityConverter}}"
+                                    Grid.Column="2"
+                                    BorderThickness="0,1,1,1"
+                                    Click="Clear_Click">
+                                    <TextBlock
+                                        Text="&#xf00d;"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        VerticalAlignment="Center" />
+                                </Button>
+                                <Button Grid.Column="3" Click="OpenPicker_Click">
+                                    <TextBlock
+                                        Text="&#xf07b;"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        VerticalAlignment="Center" />
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter TargetName="ErrorAlertHost" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="ErrorBorder" Property="BorderBrush" Value="{DynamicResource {x:Static adonisUi:Brushes.ErrorBrush}}" />
+                                <Setter TargetName="ErrorBorder" Property="BorderThickness" Value="{DynamicResource {x:Static adonisUi:Dimensions.BorderThickness}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 </UserControl>

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MeNoisySoundboard.App.Base;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +11,10 @@ using System.Windows.Input;
 
 namespace MeNoisySoundboard.App.Logic.Sounds.Context
 {
-    public class Sound : ICloneable
+    public class Sound : ErrorValidationContext, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public Guid? Id { get; set; } = null;
 
         public string Name { get; set; }
@@ -17,11 +22,6 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
 
         public TimeSpan Duration { get; set; }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
     }
 
     public class SoundsContext

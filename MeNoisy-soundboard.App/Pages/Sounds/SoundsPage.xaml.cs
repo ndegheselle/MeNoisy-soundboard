@@ -1,4 +1,4 @@
-﻿using MeNoisySoundboard.App.Base;
+﻿using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System.Windows;
 

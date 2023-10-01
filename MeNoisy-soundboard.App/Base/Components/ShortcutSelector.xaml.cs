@@ -28,7 +28,7 @@ namespace MeNoisySoundboard.App.Base.Components
         #region Dependency properties
 
         public static readonly DependencyProperty ShortcutProperty = DependencyProperty.Register(
-            "Shortcut", typeof(ObservableCollection<Key>), typeof(ShortcutSelector), new PropertyMetadata(new ObservableCollection<Key>()));
+            "Shortcut", typeof(ObservableCollection<Key>), typeof(ShortcutSelector), new FrameworkPropertyMetadata(new ObservableCollection<Key>(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public ObservableCollection<Key> Shortcut
         {

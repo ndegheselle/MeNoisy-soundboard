@@ -1,5 +1,5 @@
 ﻿using AdonisUI.Controls;
-using MeNoisySoundboard.App.Base;
+using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Logic;
 using MeNoisySoundboard.App.Pages.Sounds;
 using System;
@@ -43,7 +43,7 @@ namespace MeNoisySoundboard.App
         #region UI Events
         private void NavigationBack_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.Pop();
+            Navigation.Pop(canceled:true);
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeNoisySoundboard.App.Base
+namespace MeNoisySoundboard.App.Base.UI
 {
     public interface IApp
     {

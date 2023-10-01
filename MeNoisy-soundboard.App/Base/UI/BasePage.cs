@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace MeNoisySoundboard.App.Base
+namespace MeNoisySoundboard.App.Base.UI
 {
     public class BasePage<TContext> : BasePage where TContext : class, new()
     {
@@ -11,7 +11,7 @@ namespace MeNoisySoundboard.App.Base
         {
             base.Show(app, contexte, parameters);
             Context = contexte as TContext;
-            this.DataContext = Context;
+            DataContext = Context;
         }
     }
 
@@ -25,7 +25,7 @@ namespace MeNoisySoundboard.App.Base
         }
 
         // Async to handle pages change animation for example
-        public virtual async Task Hide()
+        public virtual async Task Hide(bool canceled)
         { }
     }
 }

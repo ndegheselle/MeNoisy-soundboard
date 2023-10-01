@@ -1,11 +1,11 @@
-﻿<base:BasePage
+﻿<baseUI:BasePage
     x:TypeArguments="context:SoundsContext"
     xmlns:context="clr-namespace:MeNoisySoundboard.App.Logic.Sounds.Context"
     x:Class="MeNoisySoundboard.App.Pages.Sounds.SoundsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:base="clr-namespace:MeNoisySoundboard.App.Base"
+    xmlns:baseUI="clr-namespace:MeNoisySoundboard.App.Base.UI"
     xmlns:components="clr-namespace:MeNoisySoundboard.App.Base.Components"
     xmlns:local="clr-namespace:MeNoisySoundboard.App.Pages.Sounds"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,8 +13,8 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <Grid Margin="8,4">
+    <StackPanel Margin="4">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
@@ -40,14 +40,9 @@
                     VerticalAlignment="Center" />
             </Button>
         </Grid>
-        <Separator Margin="8,4" />
-        <ListBox ItemsSource="{Binding Sounds}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
+        <Separator Margin="0,4" />
+        <ItemsControl ItemsSource="{Binding Sounds}">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="context:Sound">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -92,7 +87,7 @@
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
-</base:BasePage>
+</baseUI:BasePage>
