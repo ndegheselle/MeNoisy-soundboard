@@ -33,8 +33,6 @@ namespace MeNoisySoundboard.App.Pages.Sounds
                 ActualSound.CopyProperties(OriginalSound);
             }
             this.DataContext = ActualSound;
-            ActualSound.AddError(nameof(Sound.Name), "Invalid file name.");
-            ActualSound.AddError(nameof(Sound.FilePath), "Invalid file name.");
         }
 
         public override async Task Hide(bool canceled)
@@ -73,7 +71,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
                 catch (COMException ex)
                 {
                     // Show validation error
-                    ActualSound.AddError(nameof(Sound.FilePath), "Invalid file name.");
+                    ActualSound.AddError(nameof(Sound.FilePath), "Invalid file type.");
                     return;
                 }
             }

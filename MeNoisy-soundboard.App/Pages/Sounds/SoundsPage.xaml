@@ -59,7 +59,7 @@
                             Grid.Column="1"
                             Orientation="Vertical"
                             VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Duration}" TextAlignment="Right" />
+                            <TextBlock Text="{Binding Duration, StringFormat=\{0:hh\\:mm\\:ss\\.ff\}}" TextAlignment="Right" />
                             <components:ShortcutDisplay Shortcut="{Binding Shortcut}" />
                         </StackPanel>
                         <StackPanel
