@@ -65,8 +65,8 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             {
                 try
                 {
-                    AudioManager audioManager = new AudioManager();
-                    ActualSound.Duration = audioManager.GetFileTotalTime(ActualSound.FilePath);
+                    AudioPlayer audioPlayer = new AudioPlayer(ActualSound);
+                    ActualSound.Duration = audioPlayer.TotalTime;
                 }
                 catch (COMException ex)
                 {

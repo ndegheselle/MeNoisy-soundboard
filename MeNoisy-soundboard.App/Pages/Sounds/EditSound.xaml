@@ -29,6 +29,11 @@
             <components:FilePicker SelectedFilePath="{Binding FilePath}" Margin="0,0,0,6" />
             <TextBlock Text="Shortcut" />
             <components:ShortcutSelector Shortcut="{Binding Shortcut}" Margin="0,0,0,6" />
+            <TextBlock Text="Volume" />
+            <Slider
+                Minimum="0.1"
+                Maximum="1.0"
+                Value="{Binding Volume}" />
         </StackPanel>
 
         <Grid Grid.Row="2">
