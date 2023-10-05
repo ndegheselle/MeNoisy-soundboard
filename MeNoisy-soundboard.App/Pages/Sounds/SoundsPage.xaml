@@ -120,7 +120,7 @@
                             Value="{Binding Player.CurrentTime.TotalMilliseconds, Mode=OneWay}"
                             Maximum="{Binding Player.TotalTime.TotalMilliseconds, Mode=OneWay}"
                             adonisExtensions:ProgressBarExtension.IsProgressAnimationEnabled="False"
-                            Visibility="{Binding Player.IsPlaying, FallbackValue=Collapsed, Converter={StaticResource UniversalVisibilityConverter}}" />
+                            Visibility="{Binding Player, FallbackValue=Collapsed, Converter={StaticResource UniversalVisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

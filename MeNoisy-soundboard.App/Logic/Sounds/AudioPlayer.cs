@@ -55,7 +55,7 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         private void WaveOutDevice_PlaybackStopped(object? sender, StoppedEventArgs e)
         {
             timer = null;
-            FinishedEvent.Invoke();
+            FinishedEvent?.Invoke();
         }
 
         private void UpdateCurrentTime(object? sender, EventArgs e)

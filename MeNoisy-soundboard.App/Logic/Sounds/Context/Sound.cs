@@ -25,8 +25,26 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
         public TimeSpan Duration { get; set; }
 
+        private AudioPlayer? _player;
         [JsonIgnore]
-        public AudioPlayer? Player { get; set; } = null;
+        public AudioPlayer? Player
+        {
+            get
+            {
+                return _player;
+            }
+            set
+            {
+                _player = value;
+                if (_player == null) return;
+
+                _player.FinishedEvent += () =>
+                {
+                    _player.Dispose();
+                    _player = null;
+                };
+            }
+        }
     }
 
     public class SoundsContext

@@ -42,15 +42,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             if (sound == null) return;
 
             if (sound.Player == null)
-            {
-                AudioPlayer audioPlayer = new AudioPlayer(sound);
-                sound.Player = audioPlayer;
-                audioPlayer.FinishedEvent += () =>
-                {
-                    sound.Player = null;
-                    audioPlayer.Dispose();
-                };
-            }
+                sound.Player = new AudioPlayer(sound);
             sound.Player.Play();
         }
 
