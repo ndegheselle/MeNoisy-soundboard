@@ -45,83 +45,47 @@
         <ItemsControl ItemsSource="{Binding Sounds}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="context:Sound">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
+                    <Button HorizontalContentAlignment="Stretch" Click="PlaySound">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel>
-                                <TextBlock
-                                    Text="{Binding Name}"
+                                <StackPanel>
+                                    <TextBlock
+                                        Text="{Binding Name}"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Duration, StringFormat=\{0:mm\\:ss\\.ff\}}" />
+                                </StackPanel>
+
+                                <components:ShortcutDisplay
+                                    Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    FontWeight="Bold" />
-                                <TextBlock Text="{Binding Duration, StringFormat=\{0:mm\\:ss\\.ff\}}" />
-                            </StackPanel>
+                                    Shortcut="{Binding Shortcut}" />
 
-                            <components:ShortcutDisplay
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Shortcut="{Binding Shortcut}" />
+                                <StackPanel
+                                    Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Margin="10,0,0,0">
 
-                            <StackPanel
-                                Grid.Column="2"
-                                Orientation="Horizontal"
-                                Margin="10,0,0,0">
-
-                                <Button
-                                    Visibility="{Binding Player, Converter={StaticResource UniversalVisibilityConverter}}"
-                                    Margin="0,0,2,0"
-                                    Height="24"
-                                    Click="StopButton_Click">
-                                    <TextBlock
-                                        Text="&#xf04d;"
-                                        FontFamily="{StaticResource FontAwesomeSolid}"
-                                        VerticalAlignment="Center" />
-                                </Button>
-
-                                <Button
-                                    Visibility="{Binding Player.IsPlaying, FallbackValue=Collapsed, Converter={StaticResource UniversalVisibilityConverter}}"
-                                    Margin="0,0,2,0"
-                                    Height="24"
-                                    Click="PauseButton_Click">
-                                    <TextBlock
-                                        Text="&#xf04c;"
-                                        FontFamily="{StaticResource FontAwesomeSolid}"
-                                        VerticalAlignment="Center" />
-                                </Button>
-
-                                <Button
-                                    Visibility="{Binding Player.IsPlaying, Converter={StaticResource UniversalVisibilityConverter}, ConverterParameter=True}"
-                                    Margin="0,0,2,0"
-                                    Height="24"
-                                    x:Name="PlayButton"
-                                    Click="PlayButton_Click">
-                                    <TextBlock
-                                        Text="&#xf04b;"
-                                        FontFamily="{StaticResource FontAwesomeSolid}"
-                                        VerticalAlignment="Center" />
-                                </Button>
-
-                                <Button
-                                    Height="24"
-                                    x:Name="EditButton"
-                                    Click="EditButton_Click">
-                                    <TextBlock
-                                        Text="&#xf304;"
-                                        FontFamily="{StaticResource FontAwesomeSolid}"
-                                        VerticalAlignment="Center" />
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <ProgressBar
-                            Value="{Binding Player.CurrentTime.TotalMilliseconds, Mode=OneWay}"
-                            Maximum="{Binding Player.TotalTime.TotalMilliseconds, Mode=OneWay}"
-                            adonisExtensions:ProgressBarExtension.IsProgressAnimationEnabled="False"
-                            Visibility="{Binding Player, FallbackValue=Collapsed, Converter={StaticResource UniversalVisibilityConverter}}" />
-                    </StackPanel>
+                                    <Button
+                                        Height="24"
+                                        x:Name="EditButton"
+                                        Click="EditButton_Click">
+                                        <TextBlock
+                                            Text="&#xf304;"
+                                            FontFamily="{StaticResource FontAwesomeSolid}"
+                                            VerticalAlignment="Center" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <local:AudioPlayerControl Player="{Binding LastPlayer}" />
+                        </StackPanel>
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

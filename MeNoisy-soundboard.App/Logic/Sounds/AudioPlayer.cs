@@ -14,14 +14,13 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         public event Action? FinishedEvent;
         public bool IsPlaying { get; set; } = false;
 
-        private Sound sound;
-
-        private Timer timer;
-        private WaveOutEvent waveOutDevice;
-        private AudioFileReader audioFileReader;
-
         public TimeSpan TotalTime { get; private set; }
         public TimeSpan CurrentTime { get; private set; }
+
+        private Sound sound;
+        private Timer? timer;
+        private WaveOutEvent? waveOutDevice;
+        private AudioFileReader audioFileReader;
 
         public AudioPlayer(Sound _sound)
         {
@@ -56,6 +55,7 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         {
             timer = null;
             FinishedEvent?.Invoke();
+            Dispose();
         }
 
         private void UpdateCurrentTime(object? sender, EventArgs e)
