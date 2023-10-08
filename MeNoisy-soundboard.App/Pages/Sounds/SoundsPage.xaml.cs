@@ -1,8 +1,11 @@
-﻿using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Logic.Sounds;
 using MeNoisySoundboard.App.Logic.Sounds.Context;
+using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MeNoisySoundboard.App.Pages.Sounds
 {
@@ -11,7 +14,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
     /// </summary>
     public partial class SoundsPage : BasePage<SoundsContext>
     {
-        public SoundsPage() 
+        public SoundsPage()
         {
             InitializeComponent();
         }
@@ -38,40 +41,15 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             e.Handled = true;
         }
 
-
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private void PlaySound(object sender, RoutedEventArgs e)
         {
             FrameworkElement element = sender as FrameworkElement;
             Sound sound = element.DataContext as Sound;
-
             if (sound == null) return;
 
-            if (sound.Player == null)
-                sound.Player = new AudioPlayer(sound);
-            sound.Player.Play();
+            sound.Play();
         }
-
-
-        private void PauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameworkElement element = sender as FrameworkElement;
-            Sound sound = element.DataContext as Sound;
-
-            if (sound?.Player == null) return;
-
-            sound.Player.Pause();
-        }
-
-        private void StopButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameworkElement element = sender as FrameworkElement;
-            Sound sound = element.DataContext as Sound;
-
-            if (sound?.Player == null) return;
-
-            sound.Player.Stop();
-        }
-
         #endregion
+
     }
 }

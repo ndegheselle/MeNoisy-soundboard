@@ -25,25 +25,22 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
         public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
         public TimeSpan Duration { get; set; }
 
-        private AudioPlayer? _player;
+        private ObservableCollection<AudioPlayer> players { get; set; } = new ObservableCollection<AudioPlayer>();
         [JsonIgnore]
-        public AudioPlayer? Player
-        {
-            get
-            {
-                return _player;
-            }
-            set
-            {
-                _player = value;
-                if (_player == null) return;
+        public AudioPlayer? LastPlayer { get; set; }
 
-                _player.FinishedEvent += () =>
-                {
-                    _player.Dispose();
-                    _player = null;
-                };
-            }
+        public void Play()
+        {
+            var audioPlayer = new AudioPlayer(this);
+            LastPlayer = audioPlayer;
+            players.Add(audioPlayer);
+            LastPlayer.FinishedEvent += () =>
+            {
+                players.Remove(audioPlayer);
+                if (players.Count == 0)
+                    LastPlayer = null;
+            };
+            LastPlayer.Play();
         }
     }
 

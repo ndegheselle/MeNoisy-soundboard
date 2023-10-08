@@ -2,6 +2,7 @@
 using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Logic;
 using MeNoisySoundboard.App.Logic.Sounds;
+using MeNoisySoundboard.App.Logic.Sounds.Context;
 using MeNoisySoundboard.App.Pages.Sounds;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace MeNoisySoundboard.App
     /// </summary>
     public partial class MainWindow : AdonisWindow, IApp, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public GlobalContext GlobalContext { get; set; }
         public NavigationHandler Navigation { get; set; }
 
@@ -43,12 +46,7 @@ namespace MeNoisySoundboard.App
                 if (sound.Shortcut.Count <= 0) continue;
                 if (orderedKeys.SequenceEqual(sound.Shortcut))
                 {
-                    if (sound.Player != null)
-                    {
-                        sound.Player.Stop();
-                    }
-                    sound.Player = new AudioPlayer(sound);
-                    sound.Player.Play();
+                    sound.Play();
                 }
             }
         }
