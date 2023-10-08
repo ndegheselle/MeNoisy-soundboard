@@ -19,9 +19,13 @@ namespace MeNoisySoundboard.App.Pages.Sounds
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigation.Push<EditSound>(Context, new Sound());
+            App.Navigation.Push<EditSoundPage>(Context, new Sound());
         }
 
+        private void OpenParams_Click(object sender, RoutedEventArgs e)
+        {
+            App.Navigation.Push<EditSoundPage>(Context, new Sound());
+        }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -30,7 +34,8 @@ namespace MeNoisySoundboard.App.Pages.Sounds
 
             if (sound == null) return;
 
-            App.Navigation.Push<EditSound>(Context, sound);
+            App.Navigation.Push<EditSoundPage>(Context, sound);
+            e.Handled = true;
         }
 
 

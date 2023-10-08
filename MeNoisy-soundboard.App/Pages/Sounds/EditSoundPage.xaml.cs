@@ -12,12 +12,12 @@ namespace MeNoisySoundboard.App.Pages.Sounds
     /// <summary>
     /// Logique d'interaction pour EditSound.xaml
     /// </summary>
-    public partial class EditSound : BasePage<SoundsContext>
+    public partial class EditSoundPage : BasePage<SoundsContext>
     {
         private Sound OriginalSound;
         public Sound ActualSound { get; set; }
 
-        public EditSound()
+        public EditSoundPage()
         {
             InitializeComponent();
         }

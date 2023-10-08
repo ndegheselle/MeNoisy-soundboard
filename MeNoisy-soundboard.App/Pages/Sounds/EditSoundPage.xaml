@@ -2,7 +2,7 @@
     x:TypeArguments="context:SoundsContext"
     xmlns:context="clr-namespace:MeNoisySoundboard.App.Logic.Sounds.Context"
     xmlns:baseUI="clr-namespace:MeNoisySoundboard.App.Base.UI"
-    x:Class="MeNoisySoundboard.App.Pages.Sounds.EditSound"
+    x:Class="MeNoisySoundboard.App.Pages.Sounds.EditSoundPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
