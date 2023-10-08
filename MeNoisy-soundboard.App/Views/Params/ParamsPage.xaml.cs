@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Logic.Params;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MeNoisySoundboard.App.Pages
+namespace MeNoisySoundboard.App.Views.Params
 {
     /// <summary>
-    /// Logique d'interaction pour HomePage.xaml
+    /// Logique d'interaction pour ParamsPage.xaml
     /// </summary>
-    public partial class HomePage : UserControl
+    public partial class ParamsPage : BasePage<ParamsContext>
     {
-        public HomePage()
+        public ParamsPage()
         {
             InitializeComponent();
         }

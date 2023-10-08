@@ -18,15 +18,12 @@ namespace MeNoisySoundboard.App.Base.UI
         public ObservableCollection<BasePage> Stack { get; set; } = new ObservableCollection<BasePage>();
         public bool CanGoBack { get; set; } = false;
 
-        private readonly IApp _app;
         private readonly ContentControl _navigationContainer;
 
-        public NavigationHandler(IApp app, ContentControl navigationContainer)
+        public NavigationHandler(ContentControl navigationContainer)
         {
-            _app = app;
             _navigationContainer = navigationContainer;
         }
-
 
         public void Navigate<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
         {
@@ -39,7 +36,7 @@ namespace MeNoisySoundboard.App.Base.UI
             await HideActual(false);
 
             page ??= new TPage();
-            page.Show(_app, context, parameters);
+            page.Show(context, parameters);
             Stack.Add(page);
             _navigationContainer.Content = page;
 

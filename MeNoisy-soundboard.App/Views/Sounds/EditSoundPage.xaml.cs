@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace MeNoisySoundboard.App.Pages.Sounds
+namespace MeNoisySoundboard.App.Views.Sounds
 {
     /// <summary>
     /// Logique d'interaction pour EditSound.xaml
@@ -22,9 +22,9 @@ namespace MeNoisySoundboard.App.Pages.Sounds
             InitializeComponent();
         }
 
-        public override void Show(IApp app, object contexte, object? parameters = null)
+        public override void Show(object contexte, object? parameters = null)
         {
-            base.Show(app, contexte, parameters);
+            base.Show(contexte, parameters);
             ActualSound = parameters as Sound;
 
             if (ActualSound?.Id != null)

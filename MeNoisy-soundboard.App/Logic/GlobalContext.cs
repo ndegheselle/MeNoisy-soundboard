@@ -1,4 +1,5 @@
-﻿using MeNoisySoundboard.App.Logic.Sounds.Context;
+﻿using MeNoisySoundboard.App.Logic.Params;
+using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace MeNoisySoundboard.App.Logic
     public class GlobalContext
     {
         public SoundsContext SoundsContext { get; set; } = new SoundsContext();
+        public ParamsContext ParamsContext { get; set; } = new ParamsContext();
 
         public static GlobalContext Load()
         {

@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MeNoisySoundboard.App.Pages.Sounds
+namespace MeNoisySoundboard.App.Views.Sounds
 {
     /// <summary>
     /// Logique d'interaction pour SoundControlBar.xaml

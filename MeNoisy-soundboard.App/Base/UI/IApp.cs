@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeNoisySoundboard.App.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace MeNoisySoundboard.App.Base.UI
 {
     public interface IApp
     {
-        public NavigationHandler Navigation { get; set; }
+        public GlobalContext GlobalContext { get; }
+        public NavigationHandler Navigation { get; }
         public void SaveContext();
     }
 }
