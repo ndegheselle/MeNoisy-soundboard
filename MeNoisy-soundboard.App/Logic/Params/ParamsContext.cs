@@ -10,5 +10,8 @@ namespace MeNoisySoundboard.App.Logic.Params
     public class ParamsContext : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public string? DeviceName { get; set; } = null;
+        public bool PlaySoundsOnlyOnce { get; set; } = true;
     }
 }

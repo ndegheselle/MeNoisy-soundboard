@@ -13,6 +13,7 @@ using System.Xml.Serialization;
 
 namespace MeNoisySoundboard.App.Logic
 {
+    // XXX : separate Params from all the other datas ?
     public class GlobalContext
     {
         public SoundsContext SoundsContext { get; set; } = new SoundsContext();

@@ -31,8 +31,8 @@ namespace MeNoisySoundboard.App.Views.Sounds
 
         public SoundsList()
         {
+            App = Application.Current as IApp;
             InitializeComponent();
-            App = (IApp)Application.Current;
         }
 
         #region UI Events

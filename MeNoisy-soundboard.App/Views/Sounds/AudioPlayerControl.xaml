@@ -15,8 +15,8 @@
 
         <ProgressBar
             Height="5"
-            Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"
-            Maximum="{Binding TotalTime.TotalMilliseconds, Mode=OneWay}"
+            Value="{Binding CurrentTime.TotalMilliseconds, FallbackValue=0, Mode=OneWay}"
+            Maximum="{Binding TotalTime.TotalMilliseconds, FallbackValue=0, Mode=OneWay}"
             adonisExtensions:ProgressBarExtension.IsProgressAnimationEnabled="False" />
 
         <Button

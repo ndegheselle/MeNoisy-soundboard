@@ -17,7 +17,8 @@ namespace MeNoisySoundboard.App.Base.UI
 
     public abstract class BasePage : UserControl
     {
-        protected IApp App { get; set; } = (IApp)Application.Current;
+        // Should be a direct cast but thats break the designer
+        protected IApp App { get; set; } = Application.Current as IApp;
 
         public abstract void Show(object contexte, object? parameters = null);
 
