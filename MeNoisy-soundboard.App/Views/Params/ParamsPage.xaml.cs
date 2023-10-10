@@ -1,32 +1,18 @@
 ﻿using MeNoisySoundboard.App.Base.UI;
-using MeNoisySoundboard.App.Logic.Params;
-using MeNoisySoundboard.App.Logic.Sounds.Context;
-using MeNoisySoundboard.App.Views.Sounds;
+using MeNoisySoundboard.App.Contexts;
 using NAudio.Wave;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MeNoisySoundboard.App.Views.Params
 {
     /// <summary>
     /// Logique d'interaction pour ParamsPage.xaml
     /// </summary>
-    public partial class ParamsPage : BasePage<ParamsContext>
+    public partial class ParamsPage : BasePage<GlobalParams>
     {
-        public ObservableCollection<WaveOutCapabilities> Devices { get; set; } = new ObservableCollection<WaveOutCapabilities>();
+        public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
 
         public ParamsPage()
         {
@@ -48,15 +34,17 @@ namespace MeNoisySoundboard.App.Views.Params
 
         private void Context_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            App.SaveContext();
+            GlobalParamsProvider.Save();
         }
 
         private void RefreshDevices()
         {
             Devices.Clear();
+            Devices.Add("Default");
             for (int n = -1; n < WaveIn.DeviceCount; n++)
             {
-                Devices.Add(WaveOut.GetCapabilities(n));
+                var capability = WaveOut.GetCapabilities(n);
+                Devices.Add(capability.ProductName);
             }
         }
 

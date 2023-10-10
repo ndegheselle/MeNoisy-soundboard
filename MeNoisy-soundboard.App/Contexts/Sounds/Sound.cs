@@ -1,7 +1,6 @@
 ﻿using MeNoisySoundboard.App.Base;
-using NAudio.Wave;
+using MeNoisySoundboard.App.Logic.Sounds;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MeNoisySoundboard.App.Logic.Sounds.Context
+namespace MeNoisySoundboard.App.Contexts.Sounds
 {
     public class Sound : ErrorValidationContext, INotifyPropertyChanged
     {
@@ -42,10 +41,5 @@ namespace MeNoisySoundboard.App.Logic.Sounds.Context
             };
             LastPlayer.Play();
         }
-    }
-
-    public class SoundsContext
-    {
-        public ObservableCollection<Sound> Sounds { get; set; } = new ObservableCollection<Sound>();
     }
 }

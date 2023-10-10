@@ -1,10 +1,7 @@
 using MeNoisySoundboard.App.Base.UI;
-using MeNoisySoundboard.App.Logic.Sounds;
-using MeNoisySoundboard.App.Logic.Sounds.Context;
-using System;
+using MeNoisySoundboard.App.Contexts;
+using MeNoisySoundboard.App.Contexts.Sounds;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,10 +15,10 @@ namespace MeNoisySoundboard.App.Views.Sounds
         #region Dependency properties
 
         public static readonly DependencyProperty SoundsContextProperty = DependencyProperty.Register(
-            "SoundsContext", typeof(SoundsContext), typeof(SoundsList), new FrameworkPropertyMetadata(null));
-        public SoundsContext SoundsContext
+            "Sounds", typeof(ObservableCollection<Sound>), typeof(SoundsList), new FrameworkPropertyMetadata(null));
+        public ObservableCollection<Sound> Sounds
         {
-            get => (SoundsContext)GetValue(SoundsContextProperty);
+            get => (ObservableCollection<Sound>)GetValue(SoundsContextProperty);
             set => SetValue(SoundsContextProperty, value);
         }
 
@@ -42,7 +39,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
             Sound? sound = element?.DataContext as Sound;
             if (sound == null) return;
 
-            App.Navigation.Push<EditSoundPage>(SoundsContext, sound);
+            App.Navigation.Push<EditSoundPage>(GlobalContextProvider.Context, sound);
             e.Handled = true;
         }
 

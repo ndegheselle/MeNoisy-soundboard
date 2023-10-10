@@ -1,6 +1,4 @@
 ﻿<baseUI:BasePage
-    x:TypeArguments="context:GlobalContext"
-    xmlns:context="clr-namespace:MeNoisySoundboard.App.Logic"
     xmlns:baseUI="clr-namespace:MeNoisySoundboard.App.Base.UI"
     xmlns:sounds="clr-namespace:MeNoisySoundboard.App.Views.Sounds"
     x:Class="MeNoisySoundboard.App.Views.HomePage"
@@ -52,6 +50,6 @@
             </Button>
         </Grid>
         <Separator Margin="0,4" />
-        <sounds:SoundsList SoundsContext="{Binding SoundsContext}" />
+        <sounds:SoundsList Sounds="{Binding Sounds}" />
     </StackPanel>
 </baseUI:BasePage>

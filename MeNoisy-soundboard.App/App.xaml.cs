@@ -1,4 +1,5 @@
 ﻿using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Logic;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,9 @@ namespace MeNoisySoundboard.App
     /// </summary>
     public partial class App : Application, IApp
     {
-        public GlobalContext GlobalContext { get; set; }
+        public GlobalContext GlobalContext { get; set; } = GlobalContextProvider.Context;
+        public GlobalParams GlobalParams { get; set; } = GlobalParamsProvider.Params;
+
         public NavigationHandler Navigation
         {
             get
@@ -29,7 +32,7 @@ namespace MeNoisySoundboard.App
 
         public void SaveContext()
         {
-            GlobalContext.Save();
+            GlobalContextProvider.Save();
         }
 
         #region Lifcycle
@@ -38,7 +41,6 @@ namespace MeNoisySoundboard.App
             Exit += App_Exit;
             base.OnStartup(e);
 
-            GlobalContext = GlobalContext.Load();
             HotkeyHandler.SetHook();
             HotkeyHandler.OnGlobalHotkey += HotkeyHandler_OnGlobalHotkey;
         }
@@ -52,7 +54,7 @@ namespace MeNoisySoundboard.App
         private void HotkeyHandler_OnGlobalHotkey(HashSet<Key> keys)
         {
             var orderedKeys = keys.OrderByDescending(x => x);
-            foreach (var sound in GlobalContext.SoundsContext.Sounds)
+            foreach (var sound in GlobalContext.Sounds)
             {
                 if (sound.Shortcut.Count <= 0) continue;
                 if (orderedKeys.SequenceEqual(sound.Shortcut))

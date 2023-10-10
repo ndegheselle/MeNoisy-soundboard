@@ -9,7 +9,6 @@ namespace MeNoisySoundboard.App.Base.UI
 {
     public interface IApp
     {
-        public GlobalContext GlobalContext { get; }
         public NavigationHandler Navigation { get; }
         public void SaveContext();
     }

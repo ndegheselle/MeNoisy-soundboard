@@ -1,9 +1,9 @@
 ﻿using MeNoisySoundboard.App.Base.Helpers;
 using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Contexts;
+using MeNoisySoundboard.App.Contexts.Sounds;
 using MeNoisySoundboard.App.Logic.Sounds;
-using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
     /// <summary>
     /// Logique d'interaction pour EditSound.xaml
     /// </summary>
-    public partial class EditSoundPage : BasePage<SoundsContext>
+    public partial class EditSoundPage : BasePage<GlobalContext>
     {
         private Sound OriginalSound;
         public Sound ActualSound { get; set; }

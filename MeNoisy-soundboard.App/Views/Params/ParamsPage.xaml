@@ -1,6 +1,6 @@
 ﻿<baseUI:BasePage
-    x:TypeArguments="context:ParamsContext"
-    xmlns:context="clr-namespace:MeNoisySoundboard.App.Logic.Params"
+    x:TypeArguments="context:GlobalParams"
+    xmlns:context="clr-namespace:MeNoisySoundboard.App.Contexts"
     xmlns:baseUI="clr-namespace:MeNoisySoundboard.App.Base.UI"
     x:Class="MeNoisySoundboard.App.Views.Params.ParamsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -19,17 +19,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <ComboBox
-                DisplayMemberPath="ProductName"
-                SelectedValuePath="ProductName"
-                SelectedValue="{Binding DeviceName}">
-                <ComboBox.ItemsSource>
-                    <CompositeCollection>
-                        <ComboBoxItem>Default</ComboBoxItem>
-                        <CollectionContainer Collection="{Binding Devices, RelativeSource={RelativeSource AncestorType=local:ParamsPage}}" />
-                    </CompositeCollection>
-                </ComboBox.ItemsSource>
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding Devices, RelativeSource={RelativeSource AncestorType=local:ParamsPage}}" SelectedValue="{Binding DeviceName}" />
             <Button
                 Grid.Column="1"
                 Margin="2,0,0,0"

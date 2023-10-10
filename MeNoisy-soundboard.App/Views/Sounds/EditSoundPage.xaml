@@ -1,6 +1,6 @@
 ﻿<baseUI:BasePage
-    x:TypeArguments="context:SoundsContext"
-    xmlns:context="clr-namespace:MeNoisySoundboard.App.Logic.Sounds.Context"
+    x:TypeArguments="context:GlobalContext"
+    xmlns:context="clr-namespace:MeNoisySoundboard.App.Contexts"
     xmlns:baseUI="clr-namespace:MeNoisySoundboard.App.Base.UI"
     x:Class="MeNoisySoundboard.App.Views.Sounds.EditSoundPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
