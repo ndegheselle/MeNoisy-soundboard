@@ -40,8 +40,8 @@ namespace MeNoisySoundboard.App.Views.Params
         private void RefreshDevices()
         {
             Devices.Clear();
-            Devices.Add("Default");
-            for (int n = -1; n < WaveIn.DeviceCount; n++)
+            Devices.Add(GlobalParams.DEFAULT_DEVICE_NAME);
+            for (int n = 0; n < WaveOut.DeviceCount; n++)
             {
                 var capability = WaveOut.GetCapabilities(n);
                 Devices.Add(capability.ProductName);

@@ -14,6 +14,7 @@ namespace MeNoisySoundboard.App.Views
     {
         public HomePage()
         {
+            this.DataContext = GlobalContextProvider.Context;
             InitializeComponent();
         }
 
@@ -23,7 +24,7 @@ namespace MeNoisySoundboard.App.Views
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigation.Push<EditSoundPage>(GlobalContextProvider.Context.Sounds, new Sound());
+            App.Navigation.Push<EditSoundPage>(GlobalContextProvider.Context, new Sound());
         }
 
         private void OpenParams_Click(object sender, RoutedEventArgs e)

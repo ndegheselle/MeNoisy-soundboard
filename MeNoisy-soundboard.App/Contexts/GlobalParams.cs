@@ -30,6 +30,8 @@ namespace MeNoisySoundboard.App.Contexts
 
     public class GlobalParams : INotifyPropertyChanged
     {
+        public const string DEFAULT_DEVICE_NAME = "Default";
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public bool PlaySoundsOnlyOnce { get; set; } = true;

@@ -53,7 +53,7 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
-                        <local:AudioPlayerControl Player="{Binding LastPlayer}" />
+                        <local:AudioPlayerControl Player="{Binding Players[0], FallbackValue={x:Null}}" />
                     </StackPanel>
                 </Button>
             </DataTemplate>

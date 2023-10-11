@@ -1,5 +1,6 @@
 ﻿using MeNoisySoundboard.App.Base;
 using MeNoisySoundboard.App.Logic.Sounds;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,22 +25,7 @@ namespace MeNoisySoundboard.App.Contexts.Sounds
         public ObservableCollection<Key> Shortcut { get; set; } = new ObservableCollection<Key>();
         public TimeSpan Duration { get; set; }
 
-        private ObservableCollection<AudioPlayer> players { get; set; } = new ObservableCollection<AudioPlayer>();
         [JsonIgnore]
-        public AudioPlayer? LastPlayer { get; set; }
-
-        public void Play()
-        {
-            var audioPlayer = new AudioPlayer(this);
-            LastPlayer = audioPlayer;
-            players.Add(audioPlayer);
-            LastPlayer.FinishedEvent += () =>
-            {
-                players.Remove(audioPlayer);
-                if (players.Count == 0)
-                    LastPlayer = null;
-            };
-            LastPlayer.Play();
-        }
+        public ObservableCollection<AudioPlayer> Players { get; set; } = new ObservableCollection<AudioPlayer>();
     }
 }

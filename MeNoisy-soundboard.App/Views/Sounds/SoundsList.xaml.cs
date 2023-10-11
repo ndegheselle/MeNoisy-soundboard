@@ -1,6 +1,7 @@
 using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Contexts.Sounds;
+using MeNoisySoundboard.App.Logic.Sounds;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,7 +50,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
             Sound? sound = element?.DataContext as Sound;
             if (sound == null) return;
 
-            sound.Play();
+            AudioPlayerHandler.Play(sound);
         }
         #endregion
 

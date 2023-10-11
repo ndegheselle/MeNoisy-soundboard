@@ -1,6 +1,7 @@
 ﻿using MeNoisySoundboard.App.Base.UI;
 using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Logic;
+using MeNoisySoundboard.App.Logic.Sounds;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -59,7 +60,7 @@ namespace MeNoisySoundboard.App
                 if (sound.Shortcut.Count <= 0) continue;
                 if (orderedKeys.SequenceEqual(sound.Shortcut))
                 {
-                    sound.Play();
+                    AudioPlayerHandler.Play(sound);
                 }
             }
         }
