@@ -25,18 +25,16 @@ namespace MeNoisySoundboard.App.Base.UI
             _navigationContainer = navigationContainer;
         }
 
-        public void Navigate<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
+        public void Navigate(BasePage page)
         {
             Stack.Clear();
-            Push(context, parameters, page);
+            Push(page);
         }
 
-        public async void Push<TPage>(object context, object? parameters = null, TPage? page = null) where TPage : BasePage, new()
+        public async void Push(BasePage page)
         {
             await HideActual(false);
-
-            page ??= new TPage();
-            page.Show(context, parameters);
+            page.OnShow();
             Stack.Add(page);
             _navigationContainer.Content = page;
 
@@ -57,7 +55,7 @@ namespace MeNoisySoundboard.App.Base.UI
             if (Stack.Count <= 0) return;
 
             var actualPage = Stack[Stack.Count - 1];
-            await actualPage.Hide(canceled);
+            await actualPage.OnHide(canceled);
 
         }
     }

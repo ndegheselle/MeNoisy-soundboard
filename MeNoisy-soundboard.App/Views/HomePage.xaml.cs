@@ -18,18 +18,15 @@ namespace MeNoisySoundboard.App.Views
             InitializeComponent();
         }
 
-        public override void Show(object contexte, object? parameters = null)
-        {}
-
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigation.Push<EditSoundPage>(GlobalContextProvider.Context, new Sound());
+            App.Navigation.Push(new EditSoundPage(GlobalContextProvider.Context, new Sound()));
         }
 
         private void OpenParams_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigation.Push<ParamsPage>(GlobalParamsProvider.Params);
+            App.Navigation.Push(new ParamsPage(GlobalParamsProvider.Params));
         }
         #endregion
     }

@@ -53,6 +53,7 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <!--  TODO : will produce a binding warning whenever Players.Count <= 0 will have to check how to prevent that  -->
                         <local:AudioPlayerControl Player="{Binding Players[0], FallbackValue={x:Null}}" />
                     </StackPanel>
                 </Button>

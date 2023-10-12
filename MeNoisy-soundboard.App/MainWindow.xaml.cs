@@ -24,8 +24,7 @@ namespace MeNoisySoundboard.App
         {
             InitializeComponent();
             Navigation = new NavigationHandler(MainContainer);
-
-            Navigation.Navigate<HomePage>(((App)Application.Current).GlobalContext);
+            Navigation.Navigate(new HomePage());
         }
 
 

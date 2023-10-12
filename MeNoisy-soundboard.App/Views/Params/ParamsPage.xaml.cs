@@ -10,26 +10,22 @@ namespace MeNoisySoundboard.App.Views.Params
     /// <summary>
     /// Logique d'interaction pour ParamsPage.xaml
     /// </summary>
-    public partial class ParamsPage : BasePage<GlobalParams>
+    public partial class ParamsPage : BasePage
     {
         public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
+        public GlobalParams Context { get; set; }
 
-        public ParamsPage()
+        public ParamsPage(GlobalParams context)
         {
+            Context = context;
+            Context.PropertyChanged += Context_PropertyChanged;
             InitializeComponent();
             RefreshDevices();
         }
 
-        public override void Show(object contexte, object? parameters = null)
-        {
-            base.Show(contexte, parameters);
-            Context.PropertyChanged += Context_PropertyChanged;
-        }
-
-        public override Task Hide(bool canceled)
+        ~ParamsPage()
         {
             Context.PropertyChanged -= Context_PropertyChanged;
-            return base.Hide(canceled);
         }
 
         private void Context_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -40,7 +40,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
             Sound? sound = element?.DataContext as Sound;
             if (sound == null) return;
 
-            App.Navigation.Push<EditSoundPage>(GlobalContextProvider.Context, sound);
+            App.Navigation.Push(new EditSoundPage(GlobalContextProvider.Context, sound));
             e.Handled = true;
         }
 
