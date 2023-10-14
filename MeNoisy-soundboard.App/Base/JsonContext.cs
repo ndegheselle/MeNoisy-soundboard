@@ -1,42 +1,38 @@
-﻿using MeNoisySoundboard.App.Logic.Sounds.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
-namespace MeNoisySoundboard.App.Logic
+namespace MeNoisySoundboard.App.Base
 {
-    public class GlobalContext
+    public class JsonContextHandler
     {
-        public SoundsContext SoundsContext { get; set; } = new SoundsContext();
-
-        public static GlobalContext Load()
+        public static T? Load<T>(string fileName)
         {
             // TODO : move app name to config
             string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigurationManager.AppSettings["AppName"]);
-            string filePath = Path.Combine(appFolder, "data.json");
-            
-            if (!File.Exists(filePath)) return new GlobalContext();
+            string filePath = Path.Combine(appFolder, $"{fileName}.json");
+
+            if (!File.Exists(filePath)) return default(T);
 
             string jsonString = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<GlobalContext>(jsonString);
+            return JsonSerializer.Deserialize<T>(jsonString);
         }
 
-        public void Save()
+        public static void Save(object context, string fileName)
         {
             string appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigurationManager.AppSettings["AppName"]);
 
             if (!Directory.Exists(appFolder))
                 Directory.CreateDirectory(appFolder);
 
-            string filePath = Path.Combine(appFolder, "data.json");
-            string jsonString = JsonSerializer.Serialize(this);
+            string filePath = Path.Combine(appFolder, $"{fileName}.json");
+            string jsonString = JsonSerializer.Serialize(context);
             File.WriteAllText(filePath, jsonString);
         }
     }

@@ -1,45 +1,44 @@
 ﻿using MeNoisySoundboard.App.Base.Helpers;
 using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Contexts;
+using MeNoisySoundboard.App.Contexts.Sounds;
 using MeNoisySoundboard.App.Logic.Sounds;
-using MeNoisySoundboard.App.Logic.Sounds.Context;
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace MeNoisySoundboard.App.Pages.Sounds
+namespace MeNoisySoundboard.App.Views.Sounds
 {
     /// <summary>
     /// Logique d'interaction pour EditSound.xaml
     /// </summary>
-    public partial class EditSound : BasePage<SoundsContext>
+    public partial class EditSoundPage : BasePage
     {
-        private Sound OriginalSound;
+        private Sound _originalSound;
+        
+        public GlobalContext Context { get; private set; }
         public Sound ActualSound { get; set; }
 
-        public EditSound()
+        public EditSoundPage(GlobalContext context, Sound actualSound)
         {
-            InitializeComponent();
-        }
-
-        public override void Show(IApp app, object contexte, object? parameters = null)
-        {
-            base.Show(app, contexte, parameters);
-            ActualSound = parameters as Sound;
+            Context = context;
+            ActualSound = actualSound;
 
             if (ActualSound?.Id != null)
             {
-                OriginalSound = new Sound();
-                ActualSound.CopyProperties(OriginalSound);
+                _originalSound = new Sound();
+                ActualSound.CopyProperties(_originalSound);
             }
             this.DataContext = ActualSound;
+            InitializeComponent();
         }
 
-        public override async Task Hide(bool canceled)
+        public override Task OnHide(bool canceled)
         {
-            if (!canceled || OriginalSound == null) return;
+            if (!canceled || _originalSound == null) return Task.CompletedTask;
             // Revert back to old object
-            OriginalSound.CopyProperties(ActualSound);
+            _originalSound.CopyProperties(ActualSound);
+            return Task.CompletedTask;
         }
 
         #region UI Events
@@ -61,7 +60,7 @@ namespace MeNoisySoundboard.App.Pages.Sounds
                 Context.Sounds.Add(ActualSound);
             }
            
-            if (ActualSound.FilePath != OriginalSound?.FilePath)
+            if (ActualSound.FilePath != _originalSound?.FilePath)
             {
                 try
                 {

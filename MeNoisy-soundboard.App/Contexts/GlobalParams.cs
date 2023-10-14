@@ -35,8 +35,6 @@ namespace MeNoisySoundboard.App.Contexts
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public bool PlaySoundsOnlyOnce { get; set; } = true;
-
-        // Could store the ID instead
         public KeyValuePair<string?, string> OutputDevice { get; set; } = new KeyValuePair<string?, string>(null, DEFAULT_DEVICE_NAME);
     }
 }

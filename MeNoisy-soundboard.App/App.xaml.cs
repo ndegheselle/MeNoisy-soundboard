@@ -2,7 +2,6 @@
 using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Logic;
 using MeNoisySoundboard.App.Logic.Sounds;
-using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

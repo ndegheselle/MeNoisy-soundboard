@@ -17,11 +17,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <ComboBox
-                x:Name="ComboBoxOutputDeviceId"
-                ItemsSource="{Binding Devices, RelativeSource={RelativeSource AncestorType=local:ParamsPage}}"
-                DisplayMemberPath="Value"
-                SelectedItem="{Binding OutputDevice, Mode=TwoWay}" />
+            <ComboBox ItemsSource="{Binding Devices, RelativeSource={RelativeSource AncestorType=local:ParamsPage}}" SelectedValue="{Binding DeviceName}" />
             <Button
                 Grid.Column="1"
                 Margin="2,0,0,0"
