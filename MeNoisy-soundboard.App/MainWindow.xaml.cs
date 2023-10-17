@@ -25,8 +25,22 @@ namespace MeNoisySoundboard.App
             InitializeComponent();
             Navigation = new NavigationHandler(MainContainer);
             Navigation.Navigate(new HomePage());
+
+            Init();
         }
 
+        public async void Init()
+        {
+            await webView.EnsureCoreWebView2Async();
+            webView.CoreWebView2.OpenDevToolsWindow();
+            await webView.CoreWebView2.Profile.SetPermissionStateAsync(Microsoft.Web.WebView2.Core.CoreWebView2PermissionKind.OtherSensors, "https://www.microsoft.com", Microsoft.Web.WebView2.Core.CoreWebView2PermissionState.Allow);
+            webView.CoreWebView2.PermissionRequested += CoreWebView2_PermissionRequested;
+        }
+
+        private void CoreWebView2_PermissionRequested(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2PermissionRequestedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         #region UI Events
 
