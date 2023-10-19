@@ -64,6 +64,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
             {
                 try
                 {
+                    // TODO : use AudioPlayerHandler to get the totaltime (and check if it a link or file)
                     AudioPlayer audioPlayer = new AudioPlayer(ActualSound);
                     ActualSound.Duration = audioPlayer.TotalTime;
                 }

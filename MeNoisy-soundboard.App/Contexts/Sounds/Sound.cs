@@ -26,6 +26,6 @@ namespace MeNoisySoundboard.App.Contexts.Sounds
         public TimeSpan Duration { get; set; }
 
         [JsonIgnore]
-        public ObservableCollection<AudioPlayer> Players { get; set; } = new ObservableCollection<AudioPlayer>();
+        public ObservableCollection<IAudioPlayer> Players { get; set; } = new ObservableCollection<IAudioPlayer>();
     }
 }

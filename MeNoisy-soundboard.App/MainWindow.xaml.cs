@@ -50,12 +50,12 @@ namespace MeNoisySoundboard.App
 
         private async Task SetWebViewAudio(string value)
         {
-            await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync($"setSelectedAudioDeviceId('{value}')");
+            await webView.CoreWebView2.ExecuteScriptAsync($"setSelectedAudioDeviceId('{value}')");
         }
 
         public async Task InitWebViewJs()
         {
-            await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"
+            await webView.CoreWebView2.ExecuteScriptAsync(@"
 window.audioOutputSelect = { deviceId: null, observer: null };
 async function setSelectedAudioDeviceId(deviceName) {
     let devices = await navigator.mediaDevices.enumerateDevices()
@@ -67,6 +67,7 @@ async function setSelectedAudioDeviceId(deviceName) {
     if (!selectedDevice) return;
 
     window.audioOutputSelect.deviceId = selectedDevice.deviceId || 'default';
+    applyAudioDeviceToAll();
 }
 
 function applyAudioDeviceToAll()
@@ -78,7 +79,7 @@ function applyAudioDeviceToAll()
 function mutationCallback(mutationsList, observer) {
   mutationsList.forEach((mutation) => {
     if (mutation.type === 'childList') {
-      mutation.addedNodes.forEach((node) => {console.log(node);
+      mutation.addedNodes.forEach((node) => {
         if (node instanceof HTMLMediaElement) {
           node.setSinkId(window.audioOutputSelect.deviceId);
         }
@@ -89,15 +90,13 @@ function mutationCallback(mutationsList, observer) {
 
 window.addEventListener('load', () => {
     if (!window.audioOutputSelect.observer) {
-console.log(window.audioOutputSelect.observer);
-    window.audioOutputSelect.observer = new MutationObserver(mutationCallback);
-    window.audioOutputSelect.observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-}
-
-
+        window.audioOutputSelect.observer = new MutationObserver(mutationCallback);
+        window.audioOutputSelect.observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+applyAudioDeviceToAll();
+    }
 });
                 ");
         }
