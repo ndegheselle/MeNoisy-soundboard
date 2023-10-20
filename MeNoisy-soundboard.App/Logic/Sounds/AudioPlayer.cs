@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MeNoisySoundboard.App.Logic.Sounds
 {
-    public class AudioPlayer : IAudioPlayer, IDisposable, INotifyPropertyChanged
+    public class AudioPlayer : IDisposable, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -25,7 +25,7 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         private WaveOutEvent? waveOutDevice;
         private AudioFileReader audioFileReader;
 
-        public void Play(Sound _sound)
+        public void Play(FileSound _sound)
         {
             if (waveOutDevice == null) waveOutDevice = InitWaveOutEvent(_sound);
             waveOutDevice.Play();
@@ -52,7 +52,7 @@ namespace MeNoisySoundboard.App.Logic.Sounds
             audioFileReader.Dispose();
         }
 
-        private WaveOutEvent InitWaveOutEvent(Sound _sound)
+        private WaveOutEvent InitWaveOutEvent(FileSound _sound)
         {
             // Setup AudioFileReader
             audioFileReader = new AudioFileReader(_sound.FilePath);

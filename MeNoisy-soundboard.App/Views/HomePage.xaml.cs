@@ -21,7 +21,7 @@ namespace MeNoisySoundboard.App.Views
         #region UI Events
         private void AddSound_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigation.Push(new EditSoundPage(GlobalContextProvider.Context, new Sound()));
+            App.Navigation.Push(new EditSoundPage(GlobalContextProvider.Context, new FileSound()));
         }
 
         private void OpenParams_Click(object sender, RoutedEventArgs e)

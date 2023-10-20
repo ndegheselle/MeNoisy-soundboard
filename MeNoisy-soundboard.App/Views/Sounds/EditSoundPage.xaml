@@ -23,15 +23,28 @@
         <StackPanel>
             <TextBlock Text="Name" />
             <TextBox Text="{Binding Name}" Margin="0,0,0,6" />
-            <TextBlock Text="Sound file" />
-            <components:FilePicker SelectedFilePath="{Binding FilePath}" Margin="0,0,0,6" />
             <TextBlock Text="Shortcut" />
             <components:ShortcutSelector Shortcut="{Binding Shortcut}" Margin="0,0,0,6" />
-            <TextBlock Text="Volume" />
-            <Slider
-                Minimum="0.1"
-                Maximum="1.0"
-                Value="{Binding Volume}" />
+
+            <TabControl x:Name="TabSoundType" SelectionChanged="TabSoundType_SelectionChanged">
+                <TabItem Header="From a file">
+                    <StackPanel>
+                        <TextBlock Text="Sound file" />
+                        <components:FilePicker SelectedFilePath="{Binding FilePath}" Margin="0,0,0,6" />
+                        <TextBlock Text="Volume" />
+                        <Slider
+                            Minimum="0.1"
+                            Maximum="1.0"
+                            Value="{Binding Volume}" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="From a link">
+                    <StackPanel>
+                        <TextBlock Text="URL" />
+                        <TextBox Text="{Binding Uri}" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
         </StackPanel>
 
         <Grid Grid.Row="2">

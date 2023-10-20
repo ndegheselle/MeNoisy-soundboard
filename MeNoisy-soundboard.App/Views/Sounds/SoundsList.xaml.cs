@@ -50,7 +50,7 @@ namespace MeNoisySoundboard.App.Views.Sounds
             Sound? sound = element?.DataContext as Sound;
             if (sound == null) return;
 
-            AudioPlayerHandler.Play(sound);
+            sound.Play();
         }
         #endregion
 

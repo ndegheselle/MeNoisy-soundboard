@@ -60,7 +60,7 @@ namespace MeNoisySoundboard.App
                 if (sound.Shortcut.Count <= 0) continue;
                 if (orderedKeys.SequenceEqual(sound.Shortcut))
                 {
-                    AudioPlayerHandler.Play(sound);
+                    sound.Play();
                 }
             }
         }

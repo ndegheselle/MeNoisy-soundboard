@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MeNoisySoundboard.App.Logic.Sounds
 {
-    internal class WebAudioPlayer : IAudioPlayer
+    internal class WebAudioPlayer
     {
-        public void Play(Sound sound)
+        internal void Play(WebSound webSource)
         {
             throw new NotImplementedException();
         }

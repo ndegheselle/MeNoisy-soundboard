@@ -4,8 +4,10 @@ using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Contexts.Sounds;
 using MeNoisySoundboard.App.Logic.Sounds;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace MeNoisySoundboard.App.Views.Sounds
 {
@@ -23,21 +25,24 @@ namespace MeNoisySoundboard.App.Views.Sounds
         {
             Context = context;
             ActualSound = actualSound;
+            this.DataContext = ActualSound;
+            InitializeComponent();
 
             if (ActualSound?.Id != null)
             {
-                _originalSound = new Sound();
-                ActualSound.CopyProperties(_originalSound);
+                _originalSound = new FileSound();
+                ActualSound.CopyPropertiesTo(_originalSound);
             }
-            this.DataContext = ActualSound;
-            InitializeComponent();
+
+            if (ActualSound is WebSound)
+                TabSoundType.SelectedIndex = 1;
         }
 
         public override Task OnHide(bool canceled)
         {
             if (!canceled || _originalSound == null) return Task.CompletedTask;
             // Revert back to old object
-            _originalSound.CopyProperties(ActualSound);
+            _originalSound.CopyPropertiesTo(ActualSound);
             return Task.CompletedTask;
         }
 
@@ -45,7 +50,9 @@ namespace MeNoisySoundboard.App.Views.Sounds
 
         private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Context.Sounds.Remove(ActualSound);
+            foreach (var sound in Context.Sounds.Where(x => x.Id == ActualSound.Id))
+                Context.Sounds.Remove(sound);
+
             App.SaveContext();
             App.Navigation.Pop();
         }
@@ -60,26 +67,25 @@ namespace MeNoisySoundboard.App.Views.Sounds
                 Context.Sounds.Add(ActualSound);
             }
            
-            if (ActualSound.FilePath != _originalSound?.FilePath)
-            {
-                try
-                {
-                    // TODO : use AudioPlayerHandler to get the totaltime (and check if it a link or file)
-                    AudioPlayer audioPlayer = new AudioPlayer(ActualSound);
-                    ActualSound.Duration = audioPlayer.TotalTime;
-                }
-                catch (COMException ex)
-                {
-                    // Show validation error
-                    ActualSound.AddError(nameof(Sound.FilePath), "Invalid file type.");
-                    return;
-                }
-            }
-
             App.SaveContext();
             App.Navigation.Pop();
         }
 
         #endregion
+
+        private void TabSoundType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (ActualSound.Id != null) return;
+
+            Sound newSound = null;
+            if (TabSoundType.SelectedIndex == 0)
+                newSound = new FileSound();
+            else
+                newSound = new WebSound();
+
+            ActualSound.CopyPropertiesTo(newSound);
+            ActualSound = newSound;
+            this.DataContext = ActualSound;
+        }
     }
 }
