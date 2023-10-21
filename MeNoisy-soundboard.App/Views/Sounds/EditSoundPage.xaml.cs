@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Markup;
 
 namespace MeNoisySoundboard.App.Views.Sounds
@@ -19,13 +20,25 @@ namespace MeNoisySoundboard.App.Views.Sounds
         private Sound _originalSound;
         
         public GlobalContext Context { get; private set; }
-        public Sound ActualSound { get; set; }
+
+        private Sound _actualSound;
+        public Sound ActualSound
+        {
+            get
+            {
+                return _actualSound;
+            }
+            set
+            {
+                _actualSound = value;
+                this.DataContext = _actualSound;
+            }
+        }
 
         public EditSoundPage(GlobalContext context, Sound actualSound)
         {
             Context = context;
             ActualSound = actualSound;
-            this.DataContext = ActualSound;
             InitializeComponent();
 
             if (ActualSound?.Id != null)
@@ -34,8 +47,6 @@ namespace MeNoisySoundboard.App.Views.Sounds
                 ActualSound.CopyPropertiesTo(_originalSound);
             }
 
-            if (ActualSound is WebSound)
-                TabSoundType.SelectedIndex = 1;
         }
 
         public override Task OnHide(bool canceled)
@@ -73,19 +84,21 @@ namespace MeNoisySoundboard.App.Views.Sounds
 
         #endregion
 
-        private void TabSoundType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (ActualSound.Id != null) return;
+            ComboBox comboBox = sender as ComboBox;
+            Type selectedType = comboBox.SelectedValue as Type;
+
+            if (selectedType == null || selectedType == ActualSound.GetType()) return;
 
             Sound newSound = null;
-            if (TabSoundType.SelectedIndex == 0)
-                newSound = new FileSound();
-            else
+            if (selectedType == typeof(WebSound))
                 newSound = new WebSound();
+            else
+                newSound = new FileSound();
 
             ActualSound.CopyPropertiesTo(newSound);
             ActualSound = newSound;
-            this.DataContext = ActualSound;
         }
     }
 }

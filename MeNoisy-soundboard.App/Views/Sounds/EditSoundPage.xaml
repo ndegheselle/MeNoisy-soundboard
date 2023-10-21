@@ -8,12 +8,15 @@
     xmlns:local="clr-namespace:MeNoisySoundboard.App.Views.Sounds"
     xmlns:components="clr-namespace:MeNoisySoundboard.App.Base.Components"
     xmlns:converters="clr-namespace:MeNoisySoundboard.App.Base.Converters"
+    xmlns:context="clr-namespace:MeNoisySoundboard.App.Contexts.Sounds"
     xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ObjectToTypeConverter x:Key="ObjectToTypeConverter" />
+    </UserControl.Resources>
     <Grid Margin="4">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
@@ -26,25 +29,33 @@
             <TextBlock Text="Shortcut" />
             <components:ShortcutSelector Shortcut="{Binding Shortcut}" Margin="0,0,0,6" />
 
-            <TabControl x:Name="TabSoundType" SelectionChanged="TabSoundType_SelectionChanged">
-                <TabItem Header="From a file">
-                    <StackPanel>
-                        <TextBlock Text="Sound file" />
-                        <components:FilePicker SelectedFilePath="{Binding FilePath}" Margin="0,0,0,6" />
-                        <TextBlock Text="Volume" />
-                        <Slider
-                            Minimum="0.1"
-                            Maximum="1.0"
-                            Value="{Binding Volume}" />
-                    </StackPanel>
-                </TabItem>
-                <TabItem Header="From a link">
-                    <StackPanel>
-                        <TextBlock Text="URL" />
-                        <TextBox Text="{Binding Uri}" />
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
+            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding ., Converter={StaticResource ObjectToTypeConverter}, Mode=OneWay}" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="From a file" Tag="{x:Type context:FileSound}" />
+                <ComboBoxItem Content="From a link" Tag="{x:Type context:WebSound}" />
+            </ComboBox>
+
+            <ContentControl DataContext="{Binding}" Content="{Binding}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type context:FileSound}">
+                        <StackPanel>
+                            <TextBlock Text="Sound file" />
+                            <components:FilePicker SelectedFilePath="{Binding FilePath}" Margin="0,0,0,6" />
+                            <TextBlock Text="Volume" />
+                            <Slider
+                                Minimum="0.1"
+                                Maximum="1.0"
+                                Value="{Binding Volume}" />
+                        </StackPanel>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type context:WebSound}">
+                        <StackPanel>
+                            <TextBlock Text="URL" />
+                            <TextBox Text="{Binding Uri}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
         </StackPanel>
 
         <Grid Grid.Row="2">

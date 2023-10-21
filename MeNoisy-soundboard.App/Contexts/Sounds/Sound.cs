@@ -78,6 +78,8 @@ namespace MeNoisySoundboard.App.Contexts.Sounds
         }
     }
 
+    [JsonDerivedType(typeof(FileSound), typeDiscriminator: "File")]
+    [JsonDerivedType(typeof(WebSound), typeDiscriminator: "Web")]
     public abstract class Sound : ErrorValidationContext, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -1,9 +1,6 @@
-﻿using MeNoisySoundboard.App.Contexts.Sounds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
+using System.Windows.Controls;
+using MeNoisySoundboard.App.Contexts.Sounds;
 
 namespace MeNoisySoundboard.App.Logic.Sounds
 {
@@ -11,7 +8,8 @@ namespace MeNoisySoundboard.App.Logic.Sounds
     {
         internal void Play(WebSound webSource)
         {
-            throw new NotImplementedException();
+            App app = (App)Application.Current;
+            app.WebviewSound.NavigateToSound(webSource);
         }
     }
 }
