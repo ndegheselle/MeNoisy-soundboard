@@ -13,6 +13,11 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
     <ItemsControl ItemsSource="{Binding Sounds, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <ItemsControl.ItemContainerStyle>
+            <Style>
+                <Setter Property="FrameworkElement.Margin" Value="0,1"/>
+            </Style>
+        </ItemsControl.ItemContainerStyle>
         <ItemsControl.Resources>
             <DataTemplate DataType="{x:Type context:FileSound}">
                 <Button HorizontalContentAlignment="Stretch" Click="PlaySound">
