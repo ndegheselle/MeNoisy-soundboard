@@ -1,11 +1,13 @@
 ﻿using AdonisUI.Controls;
 using MeNoisySoundboard.App.Base.UI;
+using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Logic;
 using MeNoisySoundboard.App.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,8 +27,8 @@ namespace MeNoisySoundboard.App
             InitializeComponent();
             Navigation = new NavigationHandler(MainContainer);
             Navigation.Navigate(new HomePage());
-        }
 
+        }
 
         #region UI Events
 

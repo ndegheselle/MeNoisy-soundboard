@@ -11,31 +11,6 @@ using System.Windows.Forms;
 
 namespace MeNoisySoundboard.App.Logic.Sounds
 {
-    public static class AudioPlayerHandler
-    {
-        public static AudioPlayer Play(Sound sound)
-        {
-            var globalParams = GlobalParamsProvider.Params;
-
-            // Stop previous sounds
-            if (globalParams.PlaySoundsOnlyOnce && sound.Players.Count > 0)
-            {
-                foreach(var player in sound.Players)
-                    player.Stop();
-            }
-
-            var audioPlayer = new AudioPlayer(sound);
-            sound.Players.Add(audioPlayer);
-            audioPlayer.FinishedEvent += () =>
-            {
-                sound.Players.Remove(audioPlayer);
-            };
-            audioPlayer.Play();
-
-            return audioPlayer;
-        }
-    }
-
     public class AudioPlayer : IDisposable, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -46,49 +21,26 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         public TimeSpan TotalTime { get; private set; }
         public TimeSpan CurrentTime { get; private set; }
 
-        private Sound sound;
         private Timer? timer;
         private WaveOutEvent? waveOutDevice;
         private AudioFileReader audioFileReader;
 
-        public AudioPlayer(Sound _sound)
+        public void Play(FileSound _sound)
         {
-            sound = _sound;
-            audioFileReader = new AudioFileReader(sound.FilePath);
-            audioFileReader.Volume = sound.Volume;
-
-            CurrentTime = audioFileReader.CurrentTime;
-            TotalTime = audioFileReader.TotalTime;
-        }
-
-        public void Play()
-        {
-            if (waveOutDevice == null)
-            {
-                waveOutDevice = new WaveOutEvent();
-                waveOutDevice.DeviceNumber = GetDeviceNumber();
-                waveOutDevice.Init(audioFileReader);
-                waveOutDevice.PlaybackStopped += WaveOutDevice_PlaybackStopped;
-
-                timer = new Timer();
-                timer.Tick += new EventHandler(UpdateCurrentTime);
-                timer.Interval = 100;
-                timer.Start();
-            }
-
+            if (waveOutDevice == null) waveOutDevice = InitWaveOutEvent(_sound);
             waveOutDevice.Play();
             IsPlaying = true;
         }
 
         public void Pause()
         {
-            waveOutDevice.Pause();
+            waveOutDevice?.Pause();
             IsPlaying = false;
         }
 
         public void Stop()
         {
-            waveOutDevice.Stop();
+            waveOutDevice?.Stop();
             IsPlaying = false;
         }
 
@@ -96,10 +48,33 @@ namespace MeNoisySoundboard.App.Logic.Sounds
         {
             IsPlaying = false;
             FinishedEvent = null;
-            waveOutDevice.Dispose();
+            waveOutDevice?.Dispose();
             audioFileReader.Dispose();
         }
 
+        private WaveOutEvent InitWaveOutEvent(FileSound _sound)
+        {
+            // Setup AudioFileReader
+            audioFileReader = new AudioFileReader(_sound.FilePath);
+            audioFileReader.Volume = _sound.Volume;
+
+            CurrentTime = audioFileReader.CurrentTime;
+            TotalTime = audioFileReader.TotalTime;
+
+            // Setup WaveOutEvent
+            waveOutDevice = new WaveOutEvent();
+            waveOutDevice.DeviceNumber = GetDeviceNumber();
+            waveOutDevice.Init(audioFileReader);
+            waveOutDevice.PlaybackStopped += WaveOutDevice_PlaybackStopped;
+
+            // Setup updating event
+            timer = new Timer();
+            timer.Tick += new EventHandler(UpdateCurrentTime);
+            timer.Interval = 100;
+            timer.Start();
+
+            return waveOutDevice;
+        }
 
         // Bubble up
         private void WaveOutDevice_PlaybackStopped(object? sender, StoppedEventArgs e)

@@ -13,8 +13,13 @@
     d:DesignWidth="200"
     mc:Ignorable="d">
     <ItemsControl ItemsSource="{Binding Sounds, RelativeSource={RelativeSource AncestorType=UserControl}}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="context:Sound">
+        <ItemsControl.ItemContainerStyle>
+            <Style>
+                <Setter Property="FrameworkElement.Margin" Value="0,1"/>
+            </Style>
+        </ItemsControl.ItemContainerStyle>
+        <ItemsControl.Resources>
+            <DataTemplate DataType="{x:Type context:FileSound}">
                 <Button HorizontalContentAlignment="Stretch" Click="PlaySound">
                     <StackPanel>
                         <Grid>
@@ -24,13 +29,22 @@
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel>
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock
-                                    Text="{Binding Name}"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Bold" />
-                                <TextBlock Text="{Binding Duration, StringFormat=\{0:mm\\:ss\\.ff\}}" />
+                                    Text="&#xf15b;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    FontSize="12"
+                                    Margin="0,0,4,0"
+                                    VerticalAlignment="Center" />
+                                <StackPanel>
+                                    <TextBlock
+                                        Text="{Binding Name}"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Duration, StringFormat=\{0:mm\\:ss\\.ff\}}" />
+                                </StackPanel>
                             </StackPanel>
+
 
                             <components:ShortcutDisplay
                                 Grid.Column="1"
@@ -58,6 +72,57 @@
                     </StackPanel>
                 </Button>
             </DataTemplate>
-        </ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type context:WebSound}">
+                <Button HorizontalContentAlignment="Stretch" Click="PlaySound">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Text="&#xf0ac;"
+                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                FontSize="12"
+                                Margin="0,0,4,0"
+                                VerticalAlignment="Center" />
+                            <TextBlock
+                                Text="{Binding Name}"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <components:ShortcutDisplay
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Shortcut="{Binding Shortcut}" />
+
+                        <StackPanel
+                            Grid.Column="2"
+                            Orientation="Horizontal"
+                            Margin="10,0,0,0">
+
+                            <Button Height="24" Click="OpenLinkButton_Click">
+                                <TextBlock
+                                    Text="&#xf0c1;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" />
+                            </Button>
+                            <Button
+                                Height="24"
+                                x:Name="EditButton"
+                                Click="EditButton_Click">
+                                <TextBlock
+                                    Text="&#xf304;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.Resources>
     </ItemsControl>
 </UserControl>

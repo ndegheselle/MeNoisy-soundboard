@@ -2,6 +2,7 @@
 using MeNoisySoundboard.App.Contexts;
 using MeNoisySoundboard.App.Logic;
 using MeNoisySoundboard.App.Logic.Sounds;
+using MeNoisySoundboard.App.Views.Sounds;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,6 +21,9 @@ namespace MeNoisySoundboard.App
     /// </summary>
     public partial class App : Application, IApp
     {
+        // XXX : should move it in a dedicated handler, fine there for now
+        public WebviewSound WebviewSound { get; set; }
+
         public GlobalContext GlobalContext { get; set; } = GlobalContextProvider.Context;
         public GlobalParams GlobalParams { get; set; } = GlobalParamsProvider.Params;
 
@@ -60,7 +64,7 @@ namespace MeNoisySoundboard.App
                 if (sound.Shortcut.Count <= 0) continue;
                 if (orderedKeys.SequenceEqual(sound.Shortcut))
                 {
-                    AudioPlayerHandler.Play(sound);
+                    sound.Play();
                 }
             }
         }
