@@ -4,7 +4,7 @@ WPF soundboard used to play sound on any audio peripheral.
 
 ![preview](./images/preview.gif)
 
-# Description
+## Description
 
 Was suprised that there wasn't any major soundbox that allowed you to directly use a web url without having to download it. Well, figure that not impossible to play sound of your navigator in any audio output but that's hard to do reliably.
 
