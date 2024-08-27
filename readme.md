@@ -2,7 +2,9 @@
 
 WPF soundboard used to play sound on any audio peripheral.
 
-![preview](./images/preview.gif)
+<p align="center">
+  <img src="/images/preview.gif">
+</p>
 
 ## Description
 
