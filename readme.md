@@ -6,7 +6,7 @@ WPF soundboard used to play sound on any audio peripheral.
 
 ## Description
 
-Was suprised that there wasn't any major soundbox that allowed you to directly use a web url without having to download it. Well, figure that not impossible to play sound of your navigator in any audio output but that's hard to do reliably.
+Was suprised that there wasn't any major soundbox that allowed you to directly use a web url without having to download it. Well, figure that's not impossible to play sound from your navigator to any audio output but that's hard to do reliably.
 
 Features :
 - Global system hotkeys
